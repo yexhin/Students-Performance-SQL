@@ -1,5 +1,8 @@
 # ♾️ **Students Performance**
 
+![cover](images/cover_1.png)
+
+
 ## ✍ Description:
 - In a class, it is important to oversee the performance of students to help them address their weaknesses or develop their strengths. SQL is a powerful tool that can assist with this task.
 - In this mini-project, PostgreSQL is the main tool. By using it, we can gain an overall understanding of the performance of students in a school based on their scores in Math, Reading, and Writing. With this information, teachers can adjust their academic plans to accommodate each group of students.
