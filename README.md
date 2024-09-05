@@ -21,4 +21,8 @@ This project is designed to be completed in the following steps:
 ## 🔖 Credits and Acknowledgements:
 - **Arvinth Sss**: This project was inspired by Rupesh Kumar's work on Kaggle. His project provided valuable insights and served as a reference point in the development of this project. You can view his original work [here](https://www.kaggle.com/code/arvinthsss/student-performance-eda-using-sql)
 
+
+## ✳️ The charts: 
+![An overall performance based on gender]
+
    
