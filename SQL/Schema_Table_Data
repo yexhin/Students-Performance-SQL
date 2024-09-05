@@ -1,0 +1,24 @@
+// Create SCHEMA to manage the table
+CREATE SCHEMA performance AUTHORIZATION yennhi;
+SET search_path = performance;
+
+// Create outline
+CREATE TABLE performance (
+	id serial,
+	gender varchar(10),
+	race_ethnicity varchar(15),
+	level varchar(30),
+	preparation_course varchar(10),
+	math integer,
+	reading integer,
+	writing integer
+);
+
+
+// Insert data into the table
+COPY performance (gender, race_ethnicity, level, preparation_course, math, reading, writing)
+FROM 'D:/Data/Project/StudentPerformance/StudentsPerformance.csv'
+WITH (FORMAT csv, HEADER true);
+
+// Set constraint
+ALTER TABLE performance ADD CONSTRAINT pk_performance PRIMARY KEY (id);
