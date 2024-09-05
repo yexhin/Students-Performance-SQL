@@ -23,6 +23,6 @@ This project is designed to be completed in the following steps:
 
 
 ## ✳️ The charts: 
-![An overall performance based on gender]
+![An overall performance based on gender][images/student_performance.pdf]
 
    
