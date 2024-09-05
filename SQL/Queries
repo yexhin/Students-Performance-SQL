@@ -1,0 +1,78 @@
+/* Question 1: The number of students have math score above avg group by gender: */
+WITH avg_score AS (
+    SELECT gender, AVG(math) AS avg_math
+    FROM performance
+    GROUP BY gender
+)
+SELECT p.gender, 
+       ROUND(a.avg_math::numeric,2),
+       SUM(CASE WHEN p.math > a.avg_math THEN 1 ELSE 0 END) AS above_avg,
+       SUM(CASE WHEN p.math < a.avg_math THEN 1 ELSE 0 END) AS below_avg
+FROM performance p
+JOIN avg_score a
+ON p.gender = a.gender
+GROUP BY p.gender, a.avg_math;
+
+
+
+
+/* Question 2: The number of students have reading score above avg group by gender: */
+WITH avg_score AS (
+    SELECT gender, AVG(reading) AS avg_reading
+    FROM performance
+    GROUP BY gender
+)
+SELECT p.gender, 
+       ROUND(a.avg_reading::numeric,2),
+       SUM(CASE WHEN p.reading > a.avg_reading THEN 1 ELSE 0 END) AS above_avg,
+       SUM(CASE WHEN p.reading < a.avg_reading THEN 1 ELSE 0 END) AS below_avg
+FROM performance p
+JOIN avg_score a
+ON p.gender = a.gender
+GROUP BY p.gender, a.avg_reading;
+
+
+
+
+
+
+/* Question 3: The number of students have writing score above avg group by gender: */
+WITH avg_score AS (
+    SELECT gender, AVG(writing) AS avg_writing
+    FROM performance
+    GROUP BY gender
+)
+SELECT p.gender, 
+       ROUND(a.avg_writing::numeric,2),
+       SUM(CASE WHEN p.writing > a.avg_writing THEN 1 ELSE 0 END) AS above_avg,
+       SUM(CASE WHEN p.writing < a.avg_writing THEN 1 ELSE 0 END) AS below_avg
+FROM performance p
+JOIN avg_score a
+ON p.gender = a.gender
+GROUP BY p.gender, a.avg_writing;
+
+
+
+/* Question 4: Top 5 performances */
+SELECT DISTINCT id,
+                p.gender,
+	            p.level as education_level,
+	            ROUND(((math + reading + writing) / 3.0)::numeric,2) as avg_score
+FROM performance p
+ORDER BY avg_score DESC
+LIMIT 5;
+
+
+/* Question 5: Rank the groups: */
+WITH the_avg_score AS (
+	SELECT id, race_ethnicity,
+	ROUND(((math + reading + writing) / 3.0)::numeric,2) as avg_score
+	FROM performance
+)
+SELECT ROW_NUMBER() OVER (ORDER BY ROUND(AVG(avg_score), 2) DESC) AS rank,
+	   race_ethnicity,
+	   COUNT(id) as members_group,
+	   ROUND(AVG(avg_score)::numeric,2) as the_avg_group
+FROM the_avg_score
+GROUP BY race_ethnicity
+ORDER BY the_avg_group DESC;
